@@ -2,7 +2,7 @@
 using namespace std;
 int main()
 {
-    int n, m, i, j;
+    int n, m, i, j, k;
     cin >> n >> m;
     char game_table[21][21];
     for (i = 0; i < n; i++)
@@ -17,19 +17,18 @@ int main()
     {
         cin >> Brick[i];
     }
-    for (i = 0; i < m; i++)
+    for (i = 0; i < m;)
     {
-        cout << i << endl;
-        for (j = -1;j > n ; j++)
+        for (j = -1; j < n; j++)
         {
             if ((game_table[j + 1][i] == 'O' || j + 1 == n))
             {
-                for (int k = Brick[i]; k-- > 0 && j - k >= 0; )
+                Brick[i]>j?k = j + 1:k = Brick[i];
+                for (; k-- > 0 && j - k >= 0;)
                 {
                     game_table[j - k][i] = '#';
                 }
-                i++;
-                continue;
+                i++, j = n;
             }
         }
     }
