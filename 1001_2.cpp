@@ -1,15 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int i, j;
-void print(char (*game_table)[20][20+1], int n, int m);
-void solve(int (*Brick)[20], char (*game_table)[20][20+1], int n, int m);
-
 int main()
 {
-    int n, m, Brick[20];
-    char game_table[20][20+1] = {};
+    int n, m, i, j;
     cin >> n >> m;
+    char game_table[n][m + 1] = {};
     for (i = 0; i < n; i++)
     {
         for (j = 0; j < m; j++)
@@ -17,37 +12,18 @@ int main()
             cin >> game_table[i][j];
         }
     }
-
+    int Brick[m];
     for (i = 0; i < m; i++)
     {
         cin >> Brick[i];
     }
-
-    solve(&Brick[], &game_table[20][], n, m);
-    print(&game_table[20][], n, m);
-
-    return 0;
-}
-
-void print(char (*game_table)[20][20+1], int n, int m){
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < m; j++)
-        {
-            cout << game_table[i][j];
-        }
-        cout << endl;
-    }
-}
-
-void solve(int (*Brick)[20], char (*game_table)[20][20+1], int n, int m){
     for (i = 0; i < m; i++)
     {
-        for (j = 0; j < n && Brick[i] > 0; j++)
+        for (j = 0; j < n; j++)
         {
             if ((j + 1 == n) && (game_table[j][i] == '.'))
             {
-                for (int k = j; k > j - Brick[i]; k--)
+                for (int k = j; k > 0 && k > j - Brick[i]; k--)
                 {
                     game_table[k][i] = '#';
                 }
@@ -65,5 +41,13 @@ void solve(int (*Brick)[20], char (*game_table)[20][20+1], int n, int m){
             }
         }
     }
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            cout << game_table[i][j];
+        }
+        cout << endl;
+    }
+    return 0;
 }
-        
