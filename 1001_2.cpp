@@ -4,7 +4,7 @@ int main()
 {
     int n, m, i, j;
     cin >> n >> m;
-    char game_table[n][m + 1] = {};
+    char game_table[21][21];
     for (i = 0; i < n; i++)
     {
         for (j = 0; j < m; j++)
@@ -12,32 +12,24 @@ int main()
             cin >> game_table[i][j];
         }
     }
-    int Brick[m];
+    int Brick[21];
     for (i = 0; i < m; i++)
     {
         cin >> Brick[i];
     }
     for (i = 0; i < m; i++)
     {
-        for (j = 0; j < n; j++)
+        cout << i << endl;
+        for (j = -1;j > n ; j++)
         {
-            if ((j + 1 == n) && (game_table[j][i] == '.'))
+            if ((game_table[j + 1][i] == 'O' || j + 1 == n))
             {
-                for (int k = j; k > 0 && k > j - Brick[i]; k--)
+                for (int k = Brick[i]; k-- > 0 && j - k >= 0; )
                 {
-                    game_table[k][i] = '#';
+                    game_table[j - k][i] = '#';
                 }
                 i++;
-                j = -1;
-            }
-            else if (game_table[j][i] == 'O')
-            {
-                for (int k = j - 1; k > 0 && k >= j - Brick[i]; k--)
-                {
-                    game_table[k][i] = '#';
-                }
-                i++;
-                j = -1;
+                continue;
             }
         }
     }
